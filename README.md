@@ -5,7 +5,7 @@
 ## What is it?
 
 I already setup SDL2 + GLAD + IMGUI + GLM (and networking (ENet)) libraries for you! 
-Take it and enjoy! You don't need to know CMake!
+Take it and enjoy! You don't even need to know CMake!
 
 
 
