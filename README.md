@@ -8,6 +8,9 @@ I already setup SDL2 + GLAD + IMGUI + GLM (and networking (ENet)) libraries for 
 Take it and enjoy! You don't even need to know CMake!
 
 
+![image](https://github.com/meemknight/SDL2CMakeSetup/assets/36445656/78072c54-d3cf-4379-8201-dad992a2a730)
+
+
 
 <p>Opening the Solution:</p> 
 
