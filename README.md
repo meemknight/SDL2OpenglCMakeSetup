@@ -1,4 +1,4 @@
-# SDL2CMakeSetup
+# SDL2OpenglCMakeSetup
 
 ---
 
