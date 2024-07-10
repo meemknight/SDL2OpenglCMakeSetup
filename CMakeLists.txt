@@ -1,4 +1,4 @@
-#https://github.com/meemknight/GLFWCMakeSetup
+#https://github.com/meemknight/SDL2OpenglCMakeSetup
 #Version 1.0.0
 
 cmake_minimum_required(VERSION 3.16)

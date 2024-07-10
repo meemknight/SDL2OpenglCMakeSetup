@@ -31,7 +31,8 @@ int main(int argc, char *argv[])
 #endif
 
 	// Create a window
-	SDL_Window *window = SDL_CreateWindow("Hello SDL", 100, 100, 680, 480, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+	SDL_Window *window = SDL_CreateWindow("Hello SDL", 100, 100, 680, 480,
+		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 	if (window == nullptr)
 	{
 		std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
@@ -64,8 +65,15 @@ int main(int argc, char *argv[])
 
 #pragma region imgui
 	ImGui::CreateContext();
-	// Set ImGui theme
+
+	//you can use whatever imgui theme you like!
 	imguiThemes::yellow();
+	//ImGui::StyleColorsDark();
+	//imguiThemes::gray();
+	//imguiThemes::green();
+	//imguiThemes::red();
+	//imguiThemes::embraceTheDarkness();
+
 
 	ImGuiIO &io = ImGui::GetIO(); (void)io;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
@@ -84,17 +92,7 @@ int main(int argc, char *argv[])
 	ImGui_ImplOpenGL3_Init("#version 330");
 #pragma endregion
 
-	// Create a renderer
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr)
-	{
-		SDL_DestroyWindow(window);
-		std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
-		SDL_Quit();
-		return 1;
-	}
-
-	// Initialize 2D renderer
+	//I am using my own renderer here to test, but you can remove it and use OpenGL normally!
 	gl2d::init();
 	gl2d::Renderer2D renderer2d;
 	renderer2d.create();
@@ -132,24 +130,28 @@ int main(int argc, char *argv[])
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame(window);
 		ImGui::NewFrame();
-
 		// Create a docking space
 		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
-
-		// Example ImGui window
-		ImGui::Begin("Test Window");
-		ImGui::Text("Hello, world!");
-		ImGui::Button("I am Pressy the button!");
-		float values[5] = {0.5, 0.4, 0.3, 0.56, 0.46};
-		ImGui::PlotHistogram("I am a plot!", values, 5);
-		ImGui::End();
 	#pragma endregion
 
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// Render a rectangle using OpenGL or 2D renderer
+
+		// Example ImGui window
+		ImGui::Begin("Test Window");
+		
+		ImGui::Text("Hello, world!");
+		ImGui::Button("I am Pressy the button!");
+		float values[5] = {0.5, 0.4, 0.3, 0.56, 0.46};
+		ImGui::PlotHistogram("I am a plot!", values, 5);
+		
+		ImGui::End();
+
+
+		// testing opengl
 		renderer2d.renderRectangle({100, 100, 100, 100}, Colors_Orange);
 		renderer2d.flush();
+
 
 	#pragma region imgui
 		ImGui::Render();
@@ -175,7 +177,6 @@ int main(int argc, char *argv[])
 	ImGui::DestroyContext();
 
 	// Cleanup SDL
-	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
