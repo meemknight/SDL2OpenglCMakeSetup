@@ -5,10 +5,12 @@
 #include <openglErrorReporting.h>
 #undef main
 
+#pragma region imgui
 #include "imgui.h"
 #include "backends/imgui_impl_sdl2.h"
 #include "backends/imgui_impl_opengl3.h"
 #include "imguiThemes.h"
+#pragma endregion
 
 int main(int argc, char *argv[])
 {
@@ -157,7 +159,7 @@ int main(int argc, char *argv[])
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		// Update and render additional platform windows
+		//view port stuff
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			SDL_Window *backup_current_window = SDL_GL_GetCurrentWindow();
